@@ -1,0 +1,24 @@
+{
+  "name": "dlr23",
+  "version": "1.0.0",
+  "description": "Saqib push",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently  \"cd backend && node app.js\"  \"cd frontend && npm run dev\"",
+    "dev": "concurrently  \"cd backend && npm run dev app.js\"  \"cd frontend && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xenon2k7/dlr23.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xenon2k7/dlr23/issues"
+  },
+  "homepage": "https://github.com/Xenon2k7/dlr23#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}
