@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CesiumJS App</title>
+    <script src="Cesium/Cesium.js"></script>
+    <script>
+        // Grant CesiumJS access to your ion assets
+        Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxOWNhMTgzYS0wZTI3LTQ0MDgtYTQ0MC03NTY2YmJhNGZhMjQiLCJpZCI6MTYyNDAwLCJpYXQiOjE2OTI4ODg2Mjd9.t24uPcfw77aE1I_PGLYtK2Q3tmii2Uv8ODkZcI49IPE";
+
+        const viewer = new Cesium.Viewer("cesiumContainer", {
+        terrainProvider: await Cesium.CesiumTerrainProvider.fromIonAssetId(
+            1
+        ),
+        });
+        viewer.scene.globe.depthTestAgainstTerrain = true;
+
+        try {
+            const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(96188);
+            viewer.scene.primitives.add(tileset);
+            await viewer.zoomTo(tileset);
+
+            // Apply the default style if it exists
+            const extras = tileset.asset.extras;
+            if (
+                Cesium.defined(extras) &&
+                Cesium.defined(extras.ion) &&
+                Cesium.defined(extras.ion.defaultStyle)
+            ) {
+                tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+</body>
+</html>
