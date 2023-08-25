@@ -39,9 +39,20 @@ try {
 
 // viewer.imageryLayers.addImageryProvider(singleTileImageryProvider);
 
-const imageryLayer = viewer.imageryLayers.addImageryProvider(
-  await IonImageryProvider.fromAssetId(2201924)
-);
+var show = prompt("Heatmap or NVID?").toLowerCase();
+
+  if (show == "heatmap") {
+    var heatmapImageryProvider = viewer.imageryLayers.addImageryProvider(
+      await IonImageryProvider.fromAssetId(2202689)
+    )
+  } 
+  else if (show == "nvid") { 
+    const imageryLayer = viewer.imageryLayers.addImageryProvider(
+      await IonImageryProvider.fromAssetId(2201924)
+    );
+  }
+
+
 
 
 
