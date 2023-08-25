@@ -1,4 +1,4 @@
-import { Ion, Viewer, createWorldTerrainAsync, createOsmBuildingsAsync, Cartesian3, Math, CesiumWidget, WebMapServiceImageryProvider, ImageryLayer, BaseLayerPicker,DefaultProxy,SingleTileImageryProvider,IonImageryProvider } from "cesium";
+import { Ion, Viewer, createWorldTerrainAsync, createOsmBuildingsAsync, Cartesian3, Math,Cesium3DTileset, CesiumWidget, WebMapServiceImageryProvider, ImageryLayer, BaseLayerPicker,DefaultProxy,SingleTileImageryProvider,IonImageryProvider, IonResource,GeoJsonDataSource } from "cesium";
 
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "../src/css/main.css"
@@ -39,14 +39,20 @@ try {
 
 // viewer.imageryLayers.addImageryProvider(singleTileImageryProvider);
 
-var show = prompt("Heatmap or NVID?").toLowerCase();
+var show = prompt("Heatmap or NVDI?\n>>").toLowerCase();
 
+  const tileset = viewer.scene.primitives.add(
+    await Cesium3DTileset.fromIonAssetId(96188)
+  );
   if (show == "heatmap") {
+
     var heatmapImageryProvider = viewer.imageryLayers.addImageryProvider(
       await IonImageryProvider.fromAssetId(2202689)
     )
   } 
-  else if (show == "nvid") { 
+
+  else if (show == "nvdi") { 
+
     const imageryLayer = viewer.imageryLayers.addImageryProvider(
       await IonImageryProvider.fromAssetId(2201924)
     );
